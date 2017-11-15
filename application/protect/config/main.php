@@ -29,7 +29,7 @@ return array(
 			'ipFilters'=>array('192.168.56.1','::1'),
 		),
 //        'admin',
-//		'v2'
+		'api'
 	),
 
 	// application components
@@ -47,8 +47,8 @@ return array(
 			'showScriptName' => false,
 			'caseSensitive'=> false,
 			'rules'=>array(
+				'/'=>'site/index',
 //				'admin/login'=>'admin/login/login',
-//				'v2/api/<action>' => 'v2/apiv2/<action>',
 			),
 		),
 
