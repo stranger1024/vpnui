@@ -1,0 +1,59 @@
+.mce-wordcount {
+	left: 0;
+}
+.tip-id a {
+	color: #333;
+	font-weight: normal;
+}
+.categories-button li {
+	margin-bottom: 10px;
+	min-width: 200px !important;
+	margin-right: 15px !important;
+}
+.cursor-pointer {
+	cursor: pointer;
+}
+.yell-link {
+	color: #D3D35D;
+	font-weight: 100;
+	text-decoration: underline;
+}
+.yell-link:hover {
+	color: #D3D35D;
+}
+.color_medium {
+	color: #D3D35D;
+}
+.color_low {
+	color: #093;
+}
+.color_high {
+	color: #bc0b0b;	
+}
+.colors_priority {
+	text-transform: uppercase;
+	font-size: 12px;
+	font-family: Arial;
+}
+.forvarded {
+	font-size: 12px !important;
+}
+.remove_tag_link {
+	background-color: #ccc;
+	border-radius: 8px;
+	color: #fff;
+	height: 20px;
+	padding: 0 3px 1px;
+	margin-right: 2px;
+	margin-left: 5px;
+}
+.errorMessage {
+	color: #ff0000;
+}
+.m-t-5 {
+	margin-top: 5px;
+}
+.additional_email {
+	width: 85%;
+	float: left;
+}
