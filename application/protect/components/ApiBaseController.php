@@ -37,11 +37,11 @@ class ApiBaseController extends CController {
         Yii::app()->end();
     }
 
-	protected function send404Response($message = "") {
-		header('HTTP/1.0 404 Not Found');
-		echo $message;
-		Yii::app()->end();
-	}
+//	protected function send404Response($message = "") {
+//		header('HTTP/1.0 404 Not Found');
+//		echo $message;
+//		Yii::app()->end();
+//	}
 
 	protected function requestError($code, $message = "")
 	{

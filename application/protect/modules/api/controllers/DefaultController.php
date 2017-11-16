@@ -1,9 +1,9 @@
 <?php
 
-class DefaultController extends CController
+class DefaultController extends ApiBaseController
 {
 	public function actionIndex()
 	{
-		die();
+		$this->requestError(404);
 	}
 }
