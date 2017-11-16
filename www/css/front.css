@@ -1,0 +1,62 @@
+.loader {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.25);
+	z-index: 10;
+}
+.loader-wheel {
+	width: 70px;
+	height: 70px;
+	margin-top: -40px;
+	margin-left: -40px;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	border-width: 10px;
+	border-radius: 50%;
+	-webkit-animation: spin 2s linear infinite;
+}
+.ln2 .loader-wheel {
+	border-style: double;
+	border-color: rgba(0, 98, 255, 0.51) transparent;
+	font-size: 4px;
+	padding: 8px;
+}
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0);
+	}
+	100% {
+		-webkit-transform: rotate(-360deg);
+	}
+}
+.dLabel{
+	padding: .2em .6em .3em;
+	font-size: 75%;
+	font-weight: 700;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: .25em;
+	width: 15%;
+	background-color: #777;
+	top: -9px;
+	position: relative;
+	left: -13px;
+}
+
+.leftBlock{
+	background-color: #ededed;
+	padding-right: 2px;
+	padding-left: 2px;
+	height: 608px;
+}
