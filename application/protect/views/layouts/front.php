@@ -33,6 +33,7 @@
 					<li data-index="1" data-item="mainHome"><a href='#home'><span class="menuItemTitle">Home</span></a></li>
 					<li data-index="2" data-item="companies"><a href='#companies'><span class="menuItemTitle">Companies</span></a></li>
 					<li data-index="3" data-item="users"><a href='#users'><span class="menuItemTitle">Users</span></a></li>
+					<li data-index="4" data-item="reports"><a href='#reports'><span class="menuItemTitle">Reports</span></a></li>
 				</ul>
 			</div>
 		</nav>
@@ -196,6 +197,15 @@
 	</div>
 </script>
 
+<!-- reports tempate -->
+<script type="text/template" id="tpl-reports">
+	<div class="col-lg-12" style="border: 2px solid #777">
+		<div class="dLabel" style="">Reports</div>
+
+	</div>
+</script>
+
+
 <script src="js/vendor/jquery.min.js"></script>
 <script src="js/vendor/jquery-ui.min.js"></script>
 <script src="js/vendor/jquery.number.min.js" ></script>
@@ -218,6 +228,7 @@
 <script src="js/src/views/home.js"></script>
 <script src="js/src/views/companies.js"></script>
 <script src="js/src/views/users.js"></script>
+<script src="js/src/views/reports.js"></script>
 
 <script>
 	App.init();

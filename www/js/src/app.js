@@ -59,6 +59,13 @@ var App = (function() {
 			}
 			return this.usersView;
 		},
+		reports: function() {
+			if(!this.reportsView) {
+				this.reportsView = new api.views.reportsView({
+				});
+			}
+			return this.reportsView;
+		},
 	};
 
 	var Router = Backbone.Router.extend({
@@ -67,6 +74,7 @@ var App = (function() {
 			"home": "mainHome",
 			"users": "users",
 			"companies": "companies",
+			"reports": "reports",
 			"": "mainHome"
 		},
 
@@ -88,6 +96,13 @@ var App = (function() {
 			var view = ViewsFactory.users();
 			api
 				.pageTitle("Users")
+				.changeContent(view.$el);
+			view.render();
+		},
+		reports: function(){
+			var view = ViewsFactory.reports();
+			api
+				.pageTitle("Reports")
 				.changeContent(view.$el);
 			view.render();
 		},
