@@ -79,7 +79,6 @@ App.views.companiesView = Backbone.View.extend({
 			},
 			onSelectRow: function(id){
 				if(id && id !== self.lastSelRow){
-					$("#companiesGrid").jqGrid('collapseSubGridRow', self.lastSelRow);
 					$(this).restoreRow(self.lastSelRow);
 					self.lastSelRow = id;
 				}
@@ -163,7 +162,7 @@ App.views.companiesView = Backbone.View.extend({
 			errorQuota = false;
 		}
 
-		if(companyName.trim() == '' && companyName.length > 2) {
+		if(companyName.trim() == '' || companyName.length < 2) {
 			errorName = true;
 			Utils.Loading.hide();
 			Utils.Popup.show('error', 'Ошибка', 'Company name must be entered and name must be more than 2 characters', "#companyName");
@@ -192,7 +191,11 @@ App.views.companiesView = Backbone.View.extend({
 								self.refreshGrid(data);
 							}, true);
 						}else{
-							Utils.Popup.show('error', 'Add company', 'company<br><br>Name: ' + companyName + '<br>Quota: ' + companyQuota + '<br><br>cannot added '+ response.message);
+							var errors = '';
+							$.each(response.message, function (key, value) {
+								errors = errors + "<br>"+value;
+							});
+							Utils.Popup.show('error', 'Add company', 'company<br><br>Name: ' + companyName + '<br>Quota: ' + companyQuota + '<br><br>cannot added '+ errors);
 						}
 					});
 				}else{
@@ -209,7 +212,11 @@ App.views.companiesView = Backbone.View.extend({
 								self.refreshGrid(data);
 							}, true);
 						}else{
-							Utils.Popup.show('error', 'Update company', 'company<br><br>Name: ' + companyName + '<br>Quota: ' + companyQuota + '<br><br>cannot updated '+ response.message);
+							var errors = '';
+							$.each(response.message, function (key, value) {
+								errors = errors + "<br>"+value;
+							});
+							Utils.Popup.show('error', 'Update company', 'company<br><br>Name: ' + companyName + '<br>Quota: ' + companyQuota + '<br><br>cannot updated '+ errors);
 						}
 					});
 				}
