@@ -25,6 +25,7 @@ class SiteController extends CController
 	/**
 	 * This is the action to handle external exceptions.
 	 */
+	/*
 	public function actionError()
 	{
 		if($error=Yii::app()->errorHandler->error)
@@ -36,6 +37,7 @@ class SiteController extends CController
 				$this->render('error', $error);
 		}
 	}
+	*/
 
 	/**
 	 * Displays the contact page

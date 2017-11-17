@@ -8,62 +8,83 @@ class UsersController extends ApiBaseController
 			$this->requestError(405);
 		}
 
-		/*
-		$required_params = ["device_id"];
-		foreach ($required_params as $param) {
-			if (Yii::app()->request->getParam($param, NULL) === NULL) {
-				$this->sendResponse(array('message' => $param . " parameter is required", 'success' => 0));
-			}
-		}
-		*/
-		$this->sendResponse(["success" => 1, "data" => ["users" => []]]);
+		$users = Users::getList();
+
+		$this->sendResponse(["success" => 1, "data" => $users]);
 	}
 
 	public function actionAdd(){
-		if($this->getRequestType() !== "PUSH") {
+		if($this->getRequestType() !== "POST") {
 			$this->requestError(405);
 		}
 
-		/*
-		$required_params = ["id", "name", "email"];
+		$required_params = ["company", "name", "email"];
 		foreach ($required_params as $param) {
 			if (Yii::app()->request->getParam($param, NULL) === NULL) {
 				$this->sendResponse(array('message' => $param . " parameter is required", 'success' => 0));
 			}
 		}
-		*/
-		$this->sendResponse(["success" => 1, "data" => ["create" => []]]);
+
+		$user = new Users();
+		$user->company_id = Yii::app()->request->getParam("company");
+		$user->name = Yii::app()->request->getParam("name");
+		$user->email = Yii::app()->request->getParam("email");
+
+		if($user->save()){
+			$this->sendResponse(["success" => 1, "data" => []]);
+		}else{
+			$this->sendResponse(["success" => 0, "message" => $user->getErrors()]);
+		}
 	}
 
 	public function actionUpdate(){
-		if($this->getRequestType() !== "PUSH") {
+		if($this->getRequestType() !== "POST") {
 			$this->requestError(405);
 		}
 
-		/*
-		$required_params = ["id", "name", "email"];
+		$required_params = ["id", "company", "name", "email"];
 		foreach ($required_params as $param) {
 			if (Yii::app()->request->getParam($param, NULL) === NULL) {
 				$this->sendResponse(array('message' => $param . " parameter is required", 'success' => 0));
 			}
 		}
-		*/
-		$this->sendResponse(["success" => 1, "data" => ["update" => []]]);
+
+		$user = Users::model()->findByPk(Yii::app()->request->getParam("id"));
+		if($user){
+			$user->company_id = Yii::app()->request->getParam("company");
+			$user->name = Yii::app()->request->getParam("name");
+			$user->email = Yii::app()->request->getParam("email");
+
+			if($user->save()){
+				$this->sendResponse(["success" => 1, "data" => []]);
+			}else{
+				$this->sendResponse(["success" => 0, "message" => $user->getErrors()]);
+			}
+		}else{
+			$this->sendResponse(["success" => 0, "message" => "User not found"]);
+		}
 	}
 
 	public function actionDelete(){
-		if($this->getRequestType() !== "PUSH") {
+		if($this->getRequestType() !== "DELETE") {
 			$this->requestError(405);
 		}
 
-		/*
 		$required_params = ["id"];
 		foreach ($required_params as $param) {
-			if (Yii::app()->request->getParam($param, NULL) === NULL) {
+			if (Yii::app()->request->getRestParams($param, NULL) === NULL) {
 				$this->sendResponse(array('message' => $param . " parameter is required", 'success' => 0));
 			}
 		}
-		*/
-		$this->sendResponse(["success" => 1, "data" => ["delete" => []]]);
+
+		$user = Users::model()->findByPk(Yii::app()->request->getRestParams("id"));
+		if($user){
+			$user->delete();
+			$this->sendResponse(["success" => 1, "data" => []]);
+		}else{
+			$this->sendResponse(["success" => 0, "message" => "user not found"]);
+		}
 	}
+
+
 }

@@ -96,6 +96,10 @@
 	<li data-index="<%= index %>" data-item="<%= name %>"><a href='<%= route %>'><img src="img/<%= icon %>.svg" title="<%= title %>" width="22px"><span class="menuItemTitle"><%= title %></span></a></li>
 </script>
 
+<script type="text/template" id="tpl-company-list-item">
+	<option value="<%= companyId %>"><%= companyName %></option>
+</script>
+
 <!-- home tempate -->
 <script type="text/template" id="tpl-home">
 	<div class="col-lg-12" style="border: 2px solid #777">
@@ -152,7 +156,7 @@
 	<div class="col-lg-12" style="border: 2px solid #777">
 		<div class="dLabel" style="">Users</div>
 
-		<div class="col-lg-9" style="padding: 0px;" id="userGridBlock">
+		<div class="col-lg-9" style="padding: 0px;" id="usersGridBlock">
 			<table id="usersGrid" class="table table-hover" style="width: 100%">
 
 			</table>
@@ -167,22 +171,24 @@
 			</div>
 			<div class="form-group">
 				<label class="label label-default">Name</label>
-				<input type="text" id="companyName" class="form-control" placeholder="company name" value="">
+				<input type="text" id="userName" class="form-control" placeholder="user name" value="">
 			</div>
 			<div class="form-group">
-				<label class="label label-default">Quota</label>
-				<input type="text" id="companyQuota" class="form-control" placeholder="quota" value="">
+				<label class="label label-default">Email</label>
+				<input type="text" id="userEmail" class="form-control" placeholder="user email" value="">
 			</div>
 
 			<div class="form-group" style="text-align: center;">
-				<button id="btnSave" type="button" class="btn btn-success btn-sm" data-new="0" disabled style="height: 70px;width: 120px;">
+				<input type="hidden" id="userId" value="">
+
+				<button id="btnUserSave" type="button" class="btn btn-success btn-sm" data-new="0" disabled style="height: 70px;width: 120px;">
 					<i class="fa fa-check" aria-hidden="true"></i>
 					Save</button>
-				<button id="btnNew" type="button" class="btn btn-primary btn-sm" style="height: 70px;width: 120px;">
+				<button id="btnUserNew" type="button" class="btn btn-primary btn-sm" style="height: 70px;width: 120px;">
 					<i class="fa fa-plus" aria-hidden="true"></i>
 					New user</button>
 				<br><br>
-				<button id="btnNew" type="button" class="btn btn-danger btn-sm" style="height: 70px;width: 120px;">
+				<button id="btnUserRemove" type="button" class="btn btn-danger btn-sm" style="height: 70px;width: 120px;">
 					<i class="fa fa-minus" aria-hidden="true"></i>
 					Remove user</button>
 			</div>

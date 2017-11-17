@@ -133,6 +133,80 @@ var BackServices = {
 			}
 		});
 	},
+	getUsers: function(successCallback){
+		var self = this;
+
+		Ajax.go({
+			url: Config.servicesUrl() + "/api/users",
+			method: "GET",
+			data: {},
+			success: function (response) {
+				if(response.success == 1) {
+					successCallback(response.data);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				self.errorEvent(jqXHR, textStatus, errorThrown);
+			}
+		});
+	},
+	addUser: function(params, successCallback){
+		var self = this;
+
+		Ajax.go({
+			url: Config.servicesUrl() + "/api/users/add",
+			method: "POST",
+			data: {
+				name: params.userName,
+				email: params. userEmail,
+				company: params. userCompany
+			},
+			success: function (response) {
+				successCallback(response);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				self.errorEvent(jqXHR, textStatus, errorThrown);
+			}
+		});
+	},
+	updateUser: function(params, successCallback){
+		var self = this;
+
+		Ajax.go({
+			url: Config.servicesUrl() + "/api/users/update",
+			method: "POST",
+			data: {
+				id: params.userId,
+				name: params.userName,
+				email: params. userEmail,
+				company: params. userCompany
+			},
+			success: function (response) {
+				successCallback(response);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				self.errorEvent(jqXHR, textStatus, errorThrown);
+			}
+		});
+	},
+	removeUser: function(id, successCallback){
+		var self = this;
+
+		Ajax.go({
+			url: Config.servicesUrl() + "/api/users/delete",
+			method: "DELETE",
+			data: {
+				id: id
+			},
+			success: function (response) {
+				successCallback(response);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				self.errorEvent(jqXHR, textStatus, errorThrown);
+			}
+		});
+	},
+
 	errorEvent: function(jqXHR, textStatus, errorThrown){
 		Utils.Loading.hide();
 
