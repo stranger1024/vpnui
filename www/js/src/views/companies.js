@@ -163,10 +163,10 @@ App.views.companiesView = Backbone.View.extend({
 			errorQuota = false;
 		}
 
-		if(companyName.trim() == '') {
+		if(companyName.trim() == '' && companyName.length > 2) {
 			errorName = true;
 			Utils.Loading.hide();
-			Utils.Popup.show('error', 'Ошибка', 'Enter company name', "#companyName");
+			Utils.Popup.show('error', 'Ошибка', 'Company name must be entered and name must be more than 2 characters', "#companyName");
 		}else{
 			errorName = false;
 		}
@@ -197,9 +197,9 @@ App.views.companiesView = Backbone.View.extend({
 					});
 				}else{
 					BackServices.updateCompany({
-						departmentNumber: companyName,
-						departmentAddress: companyQuota,
-						departmentId: companyId,
+						companyName: companyName,
+						companyQuota: companyQuota,
+						companyId: companyId,
 					}, function(response){
 						if(response.success == 1){
 							BackServices.getCompanies(function (data) {

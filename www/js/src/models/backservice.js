@@ -97,6 +97,25 @@ var BackServices = {
 			}
 		});
 	},
+	updateCompany: function(params, successCallback){
+		var self = this;
+
+		Ajax.go({
+			url: Config.servicesUrl() + "/api/companies/update",
+			method: "POST",
+			data: {
+				id: params.companyId,
+				name: params.companyName,
+				quota: params. companyQuota
+			},
+			success: function (response) {
+				successCallback(response);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				self.errorEvent(jqXHR, textStatus, errorThrown);
+			}
+		});
+	},
 	removeDepartment: function(id, successCallback){
 		var self = this;
 

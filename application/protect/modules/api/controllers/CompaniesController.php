@@ -38,19 +38,30 @@ class CompaniesController extends ApiBaseController
 	}
 
 	public function actionUpdate(){
-		if($this->getRequestType() !== "GET") {
+		if($this->getRequestType() !== "POST") {
 			$this->requestError(405);
 		}
 
-		/*
 		$required_params = ["id", "name", "quota"];
 		foreach ($required_params as $param) {
 			if (Yii::app()->request->getParam($param, NULL) === NULL) {
 				$this->sendResponse(array('message' => $param . " parameter is required", 'success' => 0));
 			}
 		}
-		*/
-		$this->sendResponse(["success" => 1, "data" => ["update" => []]]);
+
+		$company = Companies::model()->findByPk(Yii::app()->request->getParam("id"));
+		if($company){
+			$company->name = Yii::app()->request->getParam("name");
+			$company->quota = Yii::app()->request->getParam("quota");
+
+			if($company->save()){
+				$this->sendResponse(["success" => 1, "data" => []]);
+			}else{
+				$this->sendResponse(["success" => 0, "message" => $company->getErrors()]);
+			}
+		}else{
+			$this->sendResponse(["success" => 0, "message" => "Company not found"]);
+		}
 	}
 
 	public function actionDelete(){
