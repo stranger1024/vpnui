@@ -62,13 +62,30 @@
 			<div class="modal-body">
 				<div id="shortMessage">
 				</div>
-				<a href="#detailMessage" class="btn btn-default" data-toggle="collapse" style="display: none;">дополнительно</a>
-
-				<div id="detailMessage" class="main-container collapse">
-				</div>
 			</div>
 			<div class="modal-footer">
-				<button id="btnClose" type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+				<button id="btnClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Confirm-->
+<div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title"></h4>
+				<button type="button" class="close modalClose" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" id="btnOk">Yes</button>
+				<button type="button" class="btn btn-danger" id="btnCancel" data-dismiss="modal">No</button>
 			</div>
 		</div>
 	</div>
@@ -92,7 +109,7 @@
 	<div class="col-lg-12" style="border: 2px solid #777">
 		<div class="dLabel" style="">Companies</div>
 
-		<div class="col-lg-9" style="padding: 0px;" id="userGridBlock">
+		<div class="col-lg-9" style="padding: 0px;" id="companiesGridBlock">
 			<table id="companiesGrid" class="table table-hover" style="width: 100%">
 
 			</table>
@@ -105,16 +122,26 @@
 			</div>
 			<div class="form-group">
 				<label class="label label-default">Quota</label>
-				<input type="text" id="companyQuota" class="form-control" placeholder="quota" value="">
+				<div class="input-group">
+					<input type="text" id="companyQuota" data-type="quota" class="form-control" placeholder="company quota">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button">Tb</button>
+					</span>
+				</div>
 			</div>
 
 			<div class="form-group" style="text-align: center;">
-				<button id="btnSave" type="button" class="btn btn-success btn-sm" data-new="0" disabled style="height: 70px;width: 120px;">
+				<input type="hidden" id="companyId" value="">
+				<button id="btnCompanySave" type="button" class="btn btn-success btn-sm" data-new="0" disabled style="height: 50px;width: 120px;">
 					<i class="fa fa-check" aria-hidden="true"></i>
 					Save</button>
-				<button id="btnNew" type="button" class="btn btn-primary btn-sm" style="height: 70px;width: 120px;">
+				<button id="btnCompanyNew" type="button" class="btn btn-primary btn-sm" style="height: 50px;width: 120px;">
 					<i class="fa fa-plus" aria-hidden="true"></i>
 					New company</button>
+				<br><br>
+				<button id="btnCompanyRemove" type="button" class="btn btn-danger btn-sm" disabled style="height: 50px;width: 140px;">
+					<i class="fa fa-minus" aria-hidden="true"></i>
+					Remove company</button>
 			</div>
 		</div>
 	</div>
@@ -154,6 +181,10 @@
 				<button id="btnNew" type="button" class="btn btn-primary btn-sm" style="height: 70px;width: 120px;">
 					<i class="fa fa-plus" aria-hidden="true"></i>
 					New user</button>
+				<br><br>
+				<button id="btnNew" type="button" class="btn btn-danger btn-sm" style="height: 70px;width: 120px;">
+					<i class="fa fa-minus" aria-hidden="true"></i>
+					Remove user</button>
 			</div>
 		</div>
 	</div>
@@ -162,8 +193,9 @@
 <script src="js/vendor/jquery.min.js"></script>
 <script src="js/vendor/jquery-ui.min.js"></script>
 <script src="js/vendor/jquery.number.min.js" ></script>
-<script src="js/vendor/jqGrid/js/i18n/grid.locale-ru.js" type="text/javascript"></script>
+<script src="js/vendor/jqGrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="js/vendor/jqGrid/js/jquery.jqGrid.min.js" type="text/javascript"></script>
+
 
 <script src="js/vendor/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/vendor/moment/min/moment.min.js" ></script>
@@ -174,6 +206,7 @@
 
 <script src="js/src/config.js"></script>
 <script src="js/src/utils.js"></script>
+<script src="js/src/models/backservice.js"></script>
 
 <script src="js/src/app.js"></script>
 <script src="js/src/views/home.js"></script>

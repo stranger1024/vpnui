@@ -32,6 +32,15 @@ var Ajax = {
 		paramsThis.dataType = 'json';
 		paramsThis.timeout = 60000;
 		paramsThis.crossDomain = true;
+		paramsThis.data = this.prepareData(params.data);
+		$.ajax(paramsThis);
+		return false;
+	},
+	goJson: function(params) {
+		var paramsThis = params;
+		paramsThis.dataType = 'json';
+		paramsThis.timeout = 60000;
+		paramsThis.crossDomain = true;
 		paramsThis.contentType = "application/json;charset=UTF-8";
 		paramsThis.data = this.prepareJson(params.method, params.data);
 		$.ajax(paramsThis);
@@ -42,25 +51,69 @@ var Ajax = {
 		paramsThis.type = 'POST';
 		paramsThis.dataType = 'json';
 		paramsThis.timeout = 60000;
-		paramsThis.data = this.prepareJson(params.data);
+		paramsThis.data = this.prepareData(params.data);
 		paramsThis.contentType = "application/json;charset=UTF-8";
 		if (this.req != null) this.req.abort();
 		this.req = $.ajax(paramsThis);
 		return false;
 	},
-	blobToString: function (b) {
-		var u, x;
-		u = URL.createObjectURL(b);
-		x = new XMLHttpRequest();
-		x.open('GET', u, false); // although sync, you're not fetching over internet
-		x.send();
-		URL.revokeObjectURL(u);
-		return x.responseText;
-	},
+
 }
 
 var BackServices = {
 	request: null,
+	getCompanies: function(successCallback){
+		var self = this;
+
+		Ajax.go({
+			url: Config.servicesUrl() + "/api/companies",
+			method: "GET",
+			data: {},
+			success: function (response) {
+				if(response.success == 1) {
+					successCallback(response.data);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				self.errorEvent(jqXHR, textStatus, errorThrown);
+			}
+		});
+	},
+	addCompany: function(params, successCallback){
+		var self = this;
+
+		Ajax.go({
+			url: Config.servicesUrl() + "/api/companies/add",
+			method: "POST",
+			data: {
+				name: params.companyName,
+				quota: params. companyQuota
+			},
+			success: function (response) {
+				successCallback(response);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				self.errorEvent(jqXHR, textStatus, errorThrown);
+			}
+		});
+	},
+	removeDepartment: function(id, successCallback){
+		var self = this;
+
+		Ajax.go({
+			url: Config.servicesUrl() + "/api/companies/delete",
+			method: "DELETE",
+			data: {
+				id: id
+			},
+			success: function (response) {
+				successCallback(response);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				self.errorEvent(jqXHR, textStatus, errorThrown);
+			}
+		});
+	},
 	errorEvent: function(jqXHR, textStatus, errorThrown){
 		Utils.Loading.hide();
 

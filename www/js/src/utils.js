@@ -97,6 +97,65 @@ var Utils = {
 				}
 			})
 		},
+		confirm: function(type, message, callbackOk, callbackCancel, btnOkName, btnCancelName){
+			// console.log(type, title, message);
+			switch (type){
+				case "danger":
+				case "error":
+					$('#modalConfirm .modal-header').removeClass("alert-warning");
+					$('#modalConfirm .modal-header').removeClass("alert-info");
+					$('#modalConfirm .modal-header').removeClass("alert-success");
+					$('#modalConfirm .modal-header').addClass("alert-danger");
+					break;
+				case "warning":
+					$('#modalConfirm .modal-header').removeClass("alert-danger");
+					$('#modalConfirm .modal-header').removeClass("alert-info");
+					$('#modalConfirm .modal-header').removeClass("alert-success");
+					$('#modalConfirm .modal-header').addClass("alert-warning");
+					break;
+				case "info":
+					$('#modalConfirm .modal-header').removeClass("alert-danger");
+					$('#modalConfirm .modal-header').removeClass("alert-warning");
+					$('#modalConfirm .modal-header').removeClass("alert-success");
+					$('#modalConfirm .modal-header').addClass("alert-info");
+					break;
+				case "success":
+					$('#modalConfirm .modal-header').removeClass("alert-danger");
+					$('#modalConfirm .modal-header').removeClass("alert-warning");
+					$('#modalConfirm .modal-header').removeClass("alert-info");
+					$('#modalConfirm .modal-header').addClass("alert-success");
+					break;
+				default:
+					break;
+			}
+			$('#modalConfirm .modal-title').html("Внимание");
+			$('#modalConfirm .modal-body').html("<p>"+message+"</p>");
+			$('#modalConfirm').modal('show');
+			$('.modal-dialog').draggable({
+				handle: ".modal-header"
+			});
+
+			if(btnOkName !== undefined){
+				$('#modalConfirm').find('#btnOk').text(btnOkName);
+			}
+
+			if(btnCancelName !== undefined){
+				$('#modalConfirm').find('#btnCancel').text(btnCancelName);
+			}
+
+			$('#modalConfirm').on('shown.bs.modal', function (e) {
+				e.preventDefault();
+				$('#modalConfirm').find('#btnCancel').unbind('click').bind('click', function(event) {
+					callbackCancel();
+					$('#modalConfirm').modal('hide');
+				});
+				$('#modalConfirm').find('#btnOk').unbind('click').bind('click', function(event) {
+					// event.preventDefault();
+					callbackOk();
+					$('#modalConfirm').modal('hide');
+				});
+			})
+		}
 	},
 
 	Storage: {

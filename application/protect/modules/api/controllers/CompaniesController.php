@@ -7,24 +7,34 @@ class CompaniesController extends ApiBaseController
 			$this->requestError(405);
 		}
 
-		$this->sendResponse(["success" => 1, "data" => ["companies" => []]]);
+		$companies = Companies::model()->findAll(["order" => 'quota desc']);
+
+		$this->sendResponse(["success" => 1, "data" => $companies]);
 	}
 
 
 	public function actionAdd(){
-		if($this->getRequestType() !== "GET") {
+		if($this->getRequestType() !== "POST") {
 			$this->requestError(405);
 		}
 
-		/*
-		$required_params = ["device_id"];
+		$required_params = ["name", "quota"];
 		foreach ($required_params as $param) {
 			if (Yii::app()->request->getParam($param, NULL) === NULL) {
 				$this->sendResponse(array('message' => $param . " parameter is required", 'success' => 0));
 			}
 		}
-		*/
-		$this->sendResponse(["success" => 1, "data" => ["update" => []]]);
+
+		$company = new Companies();
+		$company->name = Yii::app()->request->getParam("name");
+		$company->quota = Yii::app()->request->getParam("quota");
+
+		if($company->save()){
+			$this->sendResponse(["success" => 1, "data" => []]);
+		}else{
+			$this->sendResponse(["success" => 0, "message" => $company->getErrors()]);
+		}
+
 	}
 
 	public function actionUpdate(){
@@ -44,19 +54,24 @@ class CompaniesController extends ApiBaseController
 	}
 
 	public function actionDelete(){
-		if($this->getRequestType() !== "GET") {
+		if($this->getRequestType() !== "DELETE") {
 			$this->requestError(405);
 		}
 
-		/*
 		$required_params = ["id"];
 		foreach ($required_params as $param) {
-			if (Yii::app()->request->getParam($param, NULL) === NULL) {
+			if (Yii::app()->request->getRestParams($param, NULL) === NULL) {
 				$this->sendResponse(array('message' => $param . " parameter is required", 'success' => 0));
 			}
 		}
-		*/
-		$this->sendResponse(["success" => 1, "data" => ["update" => []]]);
+
+		$company = Companies::model()->findByPk(Yii::app()->request->getRestParams("id"));
+		if($company){
+			$company->delete();
+			$this->sendResponse(["success" => 1, "data" => []]);
+		}else{
+			$this->sendResponse(["success" => 0, "message" => "company not found"]);
+		}
 	}
 
 }
