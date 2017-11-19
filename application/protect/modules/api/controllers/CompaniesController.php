@@ -85,4 +85,13 @@ class CompaniesController extends ApiBaseController
 		}
 	}
 
+	public function actionCount(){
+		if($this->getRequestType() !== "GET") {
+			$this->requestError(405);
+		}
+
+		$companies = Companies::model()->findAll();
+		$this->sendResponse(["success" => 1, "data" => ["count" => sizeof($companies)]]);
+	}
+
 }

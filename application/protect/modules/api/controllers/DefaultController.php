@@ -6,4 +6,5 @@ class DefaultController extends ApiBaseController
 	{
 		$this->requestError(404);
 	}
+
 }
