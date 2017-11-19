@@ -10,8 +10,8 @@ var Config = {
 
 	debug: true,
 
-	baseDevUrl: "http://vpnui.lo",
-	baseProdUrl: "http://vpnui.lo",
+	baseDevUrl: "http://DOMAIN",
+	baseProdUrl: "http://DOMAIN",
 
 	servicesUrl: function() {
 		return (this.environment != "dev") ? this.baseProdUrl: this.baseDevUrl;
