@@ -86,5 +86,14 @@ class UsersController extends ApiBaseController
 		}
 	}
 
+	public function actionCount(){
+		if($this->getRequestType() !== "GET") {
+			$this->requestError(405);
+		}
+
+		$users = Users::model()->findAll();
+		$this->sendResponse(["success" => 1, "data" => ["count" => sizeof($users)]]);
+	}
+
 
 }

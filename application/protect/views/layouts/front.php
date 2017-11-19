@@ -103,9 +103,14 @@
 
 <!-- home tempate -->
 <script type="text/template" id="tpl-home">
-	<div class="col-lg-12" style="border: 2px solid #777">
+	<div class="col-lg-12" style="border: 2px solid #777;">
 		<div class="dLabel" style="">Admin Panel</div>
-
+			<p class="text-info">
+				<label>Companies:</label>&nbsp;<label id="countCompanies"></label>
+			</p>
+			<p class="text-info">
+				<label>Users:</label>&nbsp;<label id="countUsers"></label>
+			</p>
 	</div>
 </script>
 
@@ -201,8 +206,43 @@
 <script type="text/template" id="tpl-reports">
 	<div class="col-lg-12" style="border: 2px solid #777">
 		<div class="dLabel" style="">Reports</div>
+		<div class="text-right">
+			<button id="btnGenerateData" type="button" class="btn btn-default">
+				<i class="fa fa-gears" aria-hidden="true"></i>
+				Generate Data</button>
+		</div>
 
-	</div>
+		<div class="col-md-4">
+			<label class="label label-default">Month</label>
+			<select class="form-control input-lg" id="reportMonth">
+				<option value="0">---</option>
+				<option value="01">January</option>
+				<option value="02">February</option>
+				<option value="03">March</option>
+				<option value="04">April</option>
+				<option value="05">May</option>
+				<option value="06">June</option>
+				<option value="07">July</option>
+				<option value="08">August</option>
+				<option value="09">September</option>
+				<option value="10">October</option>
+				<option value="11">November</option>
+				<option value="12">December</option>
+			</select>
+		</div>
+		<div class="col-md-8" style="padding-top: 25px;">
+			<button id="btnShowReport" type="button" class="btn btn-success">
+				<i class="fa fa-file-text" aria-hidden="true"></i>
+				Show Report</button>
+		</div>
+		<div class="col-md-12">
+			<div class="col-lg-12" style="padding: 0px;" id="reportsGridBlock">
+				<table id="reportsGrid" class="table table-hover" style="width: 100%">
+
+				</table>
+				<div id="jqReportsGridPager"></div>
+			</div>
+		</div>
 </script>
 
 

@@ -62,4 +62,12 @@ class ApiBaseController extends CController {
 	{
 		return $_SERVER["REQUEST_METHOD"];
 	}
+
+	public function actionError()
+	{
+		if($error=Yii::app()->errorHandler->error)
+		{
+			$this->requestError(500, $error);
+		}
+	}
 }

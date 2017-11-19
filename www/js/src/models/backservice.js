@@ -62,6 +62,79 @@ var Ajax = {
 
 var BackServices = {
 	request: null,
+	generateData: function(successCallback){
+		var self = this;
+		Ajax.go({
+			url: Config.servicesUrl() + "/api/reports/generatedata",
+			method: "GET",
+			data: {},
+			success: function (response) {
+				if (response.success == 1) {
+					successCallback(response.data.count);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				self.errorEvent(jqXHR, textStatus, errorThrown);
+			}
+		});
+	},
+	getCompanyBloked: function(month, successCallback){
+		var self = this;
+		Ajax.go({
+			url: Config.servicesUrl() + "/api/reports/companiesbloked",
+			method: "GET",
+			data: {
+				"month": month
+			},
+			success: function (response) {
+				if (response.success == 1) {
+					successCallback(response.data);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				self.errorEvent(jqXHR, textStatus, errorThrown);
+			}
+		});
+	},
+	getTransfersLog: function(month, company, successCallback){
+		var self = this;
+		Ajax.go({
+			url: Config.servicesUrl() + "/api/reports/transferlog",
+			method: "GET",
+			data: {
+				"month": month,
+				"company": company
+			},
+			success: function (response) {
+				if (response.success == 1) {
+					successCallback(response.data);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				self.errorEvent(jqXHR, textStatus, errorThrown);
+			}
+		});
+	},
+	getCountInfo: function(item, successCallback){
+		var self = this;
+		if(item == "") {
+			successCallback("");
+		}else {
+			Ajax.go({
+				url: Config.servicesUrl() + "/api/"+item+"/count",
+				method: "GET",
+				data: {},
+				success: function (response) {
+					if (response.success == 1) {
+						successCallback(response.data.count);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					self.errorEvent(jqXHR, textStatus, errorThrown);
+				}
+			});
+		}
+	},
 	getCompanies: function(successCallback){
 		var self = this;
 

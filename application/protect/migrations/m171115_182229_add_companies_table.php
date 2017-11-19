@@ -7,7 +7,7 @@ class m171115_182229_add_companies_table extends CDbMigration
 		$this->createTable('companies', array(
 			'id' => 'pk',
 			'name' => 'TINYTEXT',
-			'quota' => 'int(11) NOT NULL',
+			'quota' => 'bigint(20) NOT NULL',
 			'created' => 'TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
 		));
 	}
